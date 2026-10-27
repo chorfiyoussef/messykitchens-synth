@@ -1,0 +1,3 @@
+[submodule "third_party/MessyKitchens"]
+	path = third_party/MessyKitchens
+	url = https://github.com/MessyKitchens/MessyKitchens

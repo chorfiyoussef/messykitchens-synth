@@ -1,0 +1,110 @@
+# Asset pool for MessyKitchens-Synthetic.
+#
+# Every entry is one object. `split` decides which scenes may use it: train scenes draw only
+# from `train` assets and val scenes only from `val` assets, so the split is by object id.
+# To add assets from another source (OmniObject3D, RoboCasa, ...), add a `sources` entry with a
+# fetcher and list the objects with that `source`. Only licences in `allowed_licences` pass.
+#
+# category drives the default physics density and stacking roles (see `categories`).
+# Per-asset overrides: never_on_top, never_support, density or mass (kg; sets density from the
+# proxy volume), com_offset (metres, in the original mesh frame, added to the computed
+# solid-volume centre of mass), note.
+
+allowed_licences:
+  - CC-BY-4.0
+  - CC0-1.0
+  - MIT
+  - Apache-2.0
+
+# Assets that must never appear in training scenes (MessyKitchens-Real benchmark scans).
+holdout:
+  sources: [messykitchens_real]
+  sha256_list: docs/messykitchens_benchmark_object_models_edc5482.json
+
+sources:
+  gso:
+    fetcher: gazebo_fuel
+    owner: GoogleResearch
+    url: https://fuel.gazebosim.org/1.0/GoogleResearch/models/{name}.zip
+    attribution: "Google Scanned Objects, Google Research (Downs et al., ICRA 2022)"
+
+# density in kg/m^3 of the solid shell; roles used by the stacking/nesting planner.
+categories:
+  mug:      {density: 2300, container: true,  support: false, on_top: true}
+  cup:      {density: 1500, container: true,  support: false, on_top: true}
+  ramekin:  {density: 2300, container: true,  support: true,  on_top: true}
+  bowl:     {density: 2300, container: true,  support: true,  on_top: true}
+  plate:    {density: 2300, container: false, support: true,  on_top: true}
+  saucer:   {density: 2300, container: false, support: true,  on_top: true}
+  tray:     {density: 2300, container: false, support: true,  on_top: true}
+  pan:      {density: 2700, container: true,  support: true,  on_top: true}
+  dish:     {density: 2300, container: true,  support: true,  on_top: true}
+  pot:      {density: 1500, container: false, support: true,  on_top: false}
+  pitcher:  {density: 2300, container: false, support: false, on_top: false}
+  teapot:   {density: 2300, container: false, support: false, on_top: false}
+  kettle:   {density: 2000, container: false, support: false, on_top: false}
+  box:      {density: 300,  container: false, support: true,  on_top: true}
+  canister: {density: 500,  container: false, support: true,  on_top: true}
+  jar:      {density: 800,  container: false, support: true,  on_top: true}
+  bottle:   {density: 800,  container: false, support: false, on_top: false}
+
+assets:
+  # ---------------- train (42) ----------------
+  - {id: gso_ace_mug,              source: gso, name: ACE_Coffee_Mug_Kristen_16_oz_cup, category: mug, split: train}
+  - {id: gso_re_mug,               source: gso, name: Room_Essentials_Mug_White_Yellow, category: mug, split: train}
+  - {id: gso_threshold_mug,        source: gso, name: Threshold_Porcelain_Coffee_Mug_All_Over_Bead_White, category: mug, split: train}
+  - {id: gso_ecoforms_cup_b4,      source: gso, name: Ecoforms_Cup_B4_SAN, category: cup, split: train}
+  - {id: gso_ramekin_45oz,         source: gso, name: 45oz_RAMEKIN_ASST_DEEP_COLORS, category: ramekin, split: train}
+  - {id: gso_bia_ramekin,          source: gso, name: BIA_Porcelain_Ramekin_With_Glazed_Rim_35_45_oz_cup, category: ramekin, split: train}
+  - {id: gso_threshold_ramekin,    source: gso, name: Threshold_Ramekin_White_Porcelain, category: ramekin, split: train, mass: 0.25, note: "scan is closed on top so it simulates as a solid, not a container"}
+  - {id: gso_cole_bowl_scirocco,   source: gso, name: Cole_Hardware_Bowl_Scirocco_YellowBlue, category: bowl, split: train}
+  - {id: gso_cole_deep_bowl,       source: gso, name: Cole_Hardware_Deep_Bowl_Good_Earth_1075, category: bowl, split: train}
+  - {id: gso_ecoforms_bowl_atlas,  source: gso, name: Ecoforms_Plant_Bowl_Atlas_Low, category: bowl, split: train}
+  - {id: gso_ecoforms_bowl_turq7,  source: gso, name: Ecoforms_Plant_Bowl_Turquoise_7, category: bowl, split: train}
+  - {id: gso_ecoforms_bowl_cole,   source: gso, name: Ecoforms_Planter_Bowl_Cole_Hardware, category: bowl, split: train}
+  - {id: gso_footed_bowl,          source: gso, name: Footed_Bowl_Sand, category: bowl, split: train}
+  - {id: gso_grreat_bowl,          source: gso, name: Grreatv_Choice_Dog_Bowl_Gray_Bones_Plastic_20_fl_oz_total, category: bowl, split: train, density: 1100}
+  - {id: gso_nowdesigns_bowl,      source: gso, name: Now_Designs_Bowl_Akita_Black, category: bowl, split: train}
+  - {id: gso_seatosummit_bowl,     source: gso, name: Sea_to_Summit_Xl_Bowl, category: bowl, split: train, density: 1100}
+  - {id: gso_threshold_cereal_bowl, source: gso, name: Threshold_Bead_Cereal_Bowl_White, category: bowl, split: train}
+  - {id: gso_threshold_serving_bowl, source: gso, name: Threshold_Porcelain_Serving_Bowl_Coupe_White, category: bowl, split: train}
+  - {id: gso_toppaw_bowl,          source: gso, name: Top_Paw_Dog_Bowl_Blue_Paw_Bone_Ceramic_25_fl_oz_total, category: bowl, split: train}
+  - {id: gso_cole_saucer_electric, source: gso, name: Cole_Hardware_Saucer_Electric, category: saucer, split: train}
+  - {id: gso_kotobuki_saucer,      source: gso, name: Kotobuki_Saucer_Dragon_Fly, category: saucer, split: train}
+  - {id: gso_ecoforms_quadra,      source: gso, name: Ecoforms_Quadra_Saucer_SQ1_Avocado, category: plate, split: train}
+  - {id: gso_ecoforms_sq3_tray,    source: gso, name: Ecoforms_Saucer_SQ3_Turquoise, category: tray, split: train}
+  - {id: gso_ecoforms_plate_s11,   source: gso, name: Ecoforms_Plant_Plate_S11Turquoise, category: plate, split: train}
+  - {id: gso_re_salad_plate,       source: gso, name: Room_Essentials_Salad_Plate_Turquoise, category: plate, split: train}
+  - {id: gso_threshold_dinner_sq,  source: gso, name: Threshold_Dinner_Plate_Square_Rim_White_Porcelain, category: plate, split: train}
+  - {id: gso_threshold_salad_sq,   source: gso, name: Threshold_Salad_Plate_Square_Rim_Porcelain, category: plate, split: train}
+  - {id: gso_threshold_tray,       source: gso, name: Threshold_Tray_Rectangle_Porcelain, category: tray, split: train}
+  - {id: gso_ecoforms_saucer_s14,  source: gso, name: Ecoforms_Plant_Saucer_S14MOCHA, category: saucer, split: train}
+  - {id: gso_cole_saucer_glazed9,  source: gso, name: Cole_Hardware_Plant_Saucer_Glazed_9, category: plate, split: train}
+  - {id: gso_chefmate_frypan,      source: gso, name: Chefmate_8_Frypan, category: pan, split: train}
+  # GSO mislabel: this scan is a large white serving bowl, not a fry pan.
+  - {id: gso_calphalon_bowl,       source: gso, name: Calphalon_Kitchen_Essentials_12_Cast_Iron_Fry_Pan_Black, category: bowl, split: train}
+  - {id: gso_bundt_pan,            source: gso, name: Nordic_Ware_Original_Bundt_Pan, category: pan, split: train}
+  - {id: gso_corningware_dish,     source: gso, name: Corningware_CW_by_Corningware_3qt_Oblong_Casserole_Dish_Blue, category: dish, split: train}
+  - {id: gso_cole_butter_dish,     source: gso, name: Cole_Hardware_Butter_Dish_Square_Red, category: dish, split: train}
+  - {id: gso_tristar_cooker,       source: gso, name: TriStar_Products_PPC_Power_Pressure_Cooker_XL_in_Black, category: pot, split: train, density: 400}
+  - {id: gso_threshold_pitcher,    source: gso, name: Threshold_Porcelain_Pitcher_White, category: pitcher, split: train, mass: 1.2, note: "scan caps the opening so the interior is filled; never nested into"}
+  - {id: gso_threshold_teapot,     source: gso, name: Threshold_Porcelain_Teapot_White, category: teapot, split: train, mass: 0.9}
+  - {id: gso_vans_cereal_box,      source: gso, name: Vans_Cereal_Honey_Nut_Crunch_11_oz_box, category: box, split: train, mass: 0.35}
+  - {id: gso_nesquik_canister,     source: gso, name: Nestle_Nesquik_Chocolate_Powder_Flavored_Milk_Additive_109_Oz_Canister, category: canister, split: train}
+  - {id: gso_nescafe_jar,          source: gso, name: Nescafe_Tasters_Choice_Instant_Coffee_Decaf_House_Blend_Light_7_oz, category: jar, split: train}
+  - {id: gso_wilton_cakepan_box,   source: gso, name: Wilton_Easy_Layers_Cake_Pan_Set, category: box, split: train}
+  # ---------------- val only (10) ----------------
+  - {id: gso_cole_mug,             source: gso, name: Cole_Hardware_Mug_Classic_Blue, category: mug, split: val}
+  - {id: gso_utana_ramekin,        source: gso, name: Utana_5_Porcelain_Ramekin_Large, category: ramekin, split: val}
+  - {id: gso_re_bowl,              source: gso, name: Room_Essentials_Bowl_Turquiose, category: bowl, split: val}
+  - {id: gso_bradshaw_bowl,        source: gso, name: Bradshaw_International_11642_7_Qt_MP_Plastic_Bowl, category: bowl, split: val, density: 1100}
+  - {id: gso_threshold_bistro_plate, source: gso, name: Threshold_Bistro_Ceramic_Dinner_Plate_Ruby_Ring, category: plate, split: val}
+  - {id: gso_cole_saucer_glazed6,  source: gso, name: Cole_Hardware_Saucer_Glazed_6, category: saucer, split: val}
+  - {id: gso_ecoforms_plate_s20,   source: gso, name: Ecoforms_Plate_S20Avocado, category: plate, split: val}
+  - {id: gso_cake_pan,             source: gso, name: Chef_Style_Round_Cake_Pan_9_inch_pan, category: pan, split: val}
+  - {id: gso_aroma_frother,        source: gso, name: Aroma_Stainless_Steel_Milk_Frother_2_Cup, category: kettle, split: val, mass: 0.8}
+  - {id: gso_donfrancisco_can,     source: gso, name: Don_Franciscos_Gourmet_Coffee_Medium_Decaf_100_Colombian_12_oz_340_g, category: canister, split: val}
+  # ---------------- spares (not used unless split changed) ----------------
+  - {id: gso_ecoforms_pot_nova,    source: gso, name: Ecoforms_Pot_Nova_6_Turquoise, category: cup, split: spare}
+  - {id: gso_ecoforms_pot_gp9,     source: gso, name: Ecoforms_Plant_Pot_GP9_SAND, category: cup, split: spare}
+  - {id: gso_bd_coffeemaker,       source: gso, name: Black_Decker_CM2035B_12Cup_Thermal_Coffeemaker, category: kettle, split: spare}

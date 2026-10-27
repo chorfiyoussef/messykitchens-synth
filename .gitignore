@@ -1,0 +1,11 @@
+.venv/
+.blender/
+data/
+out/
+scratch/
+external/
+logs/
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
