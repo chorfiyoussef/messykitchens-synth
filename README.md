@@ -1,5 +1,10 @@
 # messykitchens-synth: MessyKitchens-Synthetic, recreated
 
+[![Dataset on Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-chorfiyoussef%2Fmessykitchens--synth-yellow)](https://huggingface.co/datasets/chorfiyoussef/messykitchens-synth)
+
+**Dataset:** https://huggingface.co/datasets/chorfiyoussef/messykitchens-synth (1,890 scenes, 10,800 MOD
+training records, 9 GB)
+
 A generator for synthetic cluttered-kitchen scenes following the MessyKitchens-Synthetic recipe
 (arXiv 2603.16868, §3.2 and App. C). Its output plugs straight into MOD (Multi-Object Decoder,
 github.com/MessyKitchens/MessyKitchens): every scene comes with a MOD raw manifest record per
@@ -9,8 +14,6 @@ kept view, integer instance masks and a posed GT scene (`gt_scene.glb`) for
 An independent, unofficial recreation: not affiliated with or endorsed by the MessyKitchens
 authors (Ansari et al., ECCV 2026).
 
-The generated dataset (1,890 scenes, 10,800 MOD training records) is on Hugging Face:
-[chorfiyoussef/messykitchens-synth](https://huggingface.co/datasets/chorfiyoussef/messykitchens-synth).
 Recipe summary, MOD format findings and every choice the paper leaves open:
 [docs/M1_recipe_and_format.md](docs/M1_recipe_and_format.md). Dataset statistics for the full run:
 see [Results](#results).
